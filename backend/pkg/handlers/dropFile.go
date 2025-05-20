@@ -289,3 +289,32 @@ func (h *Handler) DeleteFile(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	fmt.Fprintln(w, "File deleted successfully")
 }
+
+// ReadFileContent reads the content of a file securely.
+func ReadFileContent(filename string) ([]byte, error) {
+	// Sanitize the filename
+	sanitizedFilename := sanitizeFilename(filename)
+	if sanitizedFilename == "" {
+		return nil, fmt.Errorf("invalid filename")
+	}
+
+	// Construct the absolute file path
+	absUploadPath, err := filepath.Abs(uploadPath)
+	if err != nil {
+		return nil, fmt.Errorf("error resolving upload path: %v", err)
+	}
+	absFilePath := filepath.Join(absUploadPath, sanitizedFilename)
+
+	// Verify the path is safe
+	if !isPathSafe(absFilePath) {
+		return nil, fmt.Errorf("invalid file path")
+	}
+
+	// Read the file content
+	content, err := os.ReadFile(absFilePath)
+	if err != nil {
+		return nil, fmt.Errorf("error reading file: %v", err)
+	}
+
+	return content, nil
+}
