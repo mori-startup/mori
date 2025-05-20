@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mori</title>
+    <link rel="stylesheet" href="/public/login/login.css" />
+    <link rel="icon" type="image/png" href="/public/images/mori.png" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Title -->
+      <div class="small_logo"></div>
+      <div class="title">Mori</div>
+
+      <!-- Login Form -->
+      <form id="login-form">
+        <input
+          type="text"
+          name="username_email"
+          placeholder="Username or Email"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <button type="submit">Connexion</button>
+        <button type="button" onclick="toggleForms()">Register</button>
+        <div id="login-error" class="error-message"></div>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form">
+        <input type="text" name="username" placeholder="Username" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
+        <input
+          type="password"
+          name="confirm_password"
+          placeholder="Confirm Password"
+          required
+        />
+        <img id="captcha-image" src="/captcha" alt="Captcha" />
+        <input type="text" name="captcha_input" placeholder="Enter Captcha" required />
+      
+  
+        <button type="submit">Register</button>
+        <button type="button" onclick="toggleForms()">Login</button>
+        <div id="register-error" class="error-message"></div>
+      </form>
+    </div>
+    <div id="popup" class="popup hidden">
+      <span id="popup-message">Registration successful, please Login.</span>
+    </div>    
+    <script src="/public/login/login.js"></script>
+  </body>
+</html>

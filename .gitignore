@@ -1,0 +1,44 @@
+.DS_Store
+node_modules
+__pycache__
+dist
+
+.ropeproject
+
+# Build directories
+
+run.go
+# .dockerignore
+ndc.sh
+../backend/tempDB.db
+# audit_checklist.md
+
+# local env files
+.env.local
+.env.*.local
+backend/.env
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+backend/fileUploads/*
+
+backend/logic_llm/__pycache__
+
+Fonts/*
+
+imageUploads/*
+
+db_tables.md

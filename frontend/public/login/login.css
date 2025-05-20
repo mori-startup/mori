@@ -1,0 +1,165 @@
+@font-face {
+  font-family: "TITLE";
+  src: url(../../Fonts/SinosansRegular-aYxZ5.otf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* General Body Styling */
+body {
+  font-family: "Arial", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #1a1a1a;
+  color: #e4e4e4;
+}
+
+/* Container Styling */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #2c2c2c; /* Slightly lighter dark background */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px) scale(1.01); /* Lift effect and slight scale */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.small_logo {
+  width: 110px;
+  height: 110px;
+  margin-bottom: 10px;
+  background-image: url("../images/mori.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 90%;
+}
+
+/* Title Styling */
+.title {
+  font-size: 30px;
+  font-family: "TITLE";
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #e2e2e2;
+  text-align: center;
+  user-select: none;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  display: none;
+}
+
+form input {
+  padding: 12px;
+  width: 270px;
+  border: none;
+  border-radius: 8px;
+  background: #444;
+  color: #e4e4e4;
+  font-size: 14px;
+}
+
+form input:focus {
+  outline: 2px solid #9146bc; /* Highlight color */
+}
+
+/* Button Styling */
+form button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #9146bc; /* Primary button color */
+  color: #fff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  background: #7d3aa6;
+}
+
+/* Alternate Button Styling */
+form button[type="button"] {
+  background: transparent;
+  color: #e4e4e4;
+  border: 1px solid #444;
+  transition: all 0.3s ease;
+}
+
+form button[type="button"]:hover {
+  background: #444;
+}
+
+/* Display login form by default */
+#login-form {
+  display: flex;
+}
+
+.error-message {
+  color: rgb(255, 77, 77);
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  display: none; /* Initially hidden */
+}
+
+/* Popup Styling */
+.popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #9146bc; /* Slightly lighter dark background */
+  color: #e4e4e4;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  font-size: 16.5px;
+  z-index: 1000; /* Ensure it appears above other elements */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  animation: notification 2s ease;
+}
+
+.popup.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -60%);
+}
+
+.popup.show {
+  opacity: 1;
+  pointer-events: all;
+  transform: translate(-50%, -50%);
+}
+
+
+@keyframes notification {
+  0% {
+    top: 10%;
+  }
+  100% {
+    top: 20%;
+  }
+  
+}
