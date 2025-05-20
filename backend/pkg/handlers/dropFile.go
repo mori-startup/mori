@@ -48,16 +48,16 @@ func isPathSafe(path string) bool {
 func sanitizeFilename(filename string) string {
 	// Remove any path separators
 	filename = filepath.Base(filename)
-	
+
 	// Remove any null bytes
 	filename = strings.ReplaceAll(filename, "\x00", "")
-	
+
 	// Remove any potentially dangerous characters
 	dangerous := []string{"..", "~", "/", "\\"}
 	for _, d := range dangerous {
 		filename = strings.ReplaceAll(filename, d, "")
 	}
-	
+
 	return filename
 }
 
@@ -260,23 +260,28 @@ func (h *Handler) DeleteFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Create the full file path
-	filePath := filepath.Join(uploadPath, filename)
+	// Crée le chemin absolu du fichier dans le dossier d'upload
+	absUploadPath, err := filepath.Abs(uploadPath)
+	if err != nil {
+		http.Error(w, "Error resolving upload path", http.StatusInternalServerError)
+		return
+	}
+	absFilePath := filepath.Join(absUploadPath, filename)
 
-	// Verify the path is safe
-	if !isPathSafe(filePath) {
+	// Vérifie que le chemin est sûr
+	if !isPathSafe(absFilePath) {
 		http.Error(w, "Invalid file path", http.StatusBadRequest)
 		return
 	}
 
-	// If the file doesn't exist, return success.
-	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+	// Si le fichier n'existe pas, retourne OK
+	if _, err := os.Stat(absFilePath); os.IsNotExist(err) {
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintln(w, "File not found (already deleted)")
 		return
 	}
 
-	if err := os.Remove(filePath); err != nil {
+	if err := os.Remove(absFilePath); err != nil {
 		http.Error(w, "Error deleting file", http.StatusInternalServerError)
 		return
 	}
